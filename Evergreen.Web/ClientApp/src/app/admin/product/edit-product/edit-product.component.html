@@ -1,0 +1,79 @@
+
+<div style="width: 100%; max-width: 900px; margin: 0 auto;" class="edit-container" *ngIf="editingProduct !== undefined">
+  <form [formGroup]="productForm">
+    <mat-card>
+      <ng-container *ngIf="editingProduct">
+        <mat-card-title>
+        Edit {{editingProduct.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Make changes to {{editingProduct.title}}
+        </mat-card-subtitle>
+      </ng-container>
+      <ng-container *ngIf="!editingProduct">
+        <mat-card-title>
+        Add a new product
+        </mat-card-title>
+        <mat-card-subtitle>
+          Provide details for the new product
+        </mat-card-subtitle>
+      </ng-container>
+
+      <mat-card-content>
+
+        <div style="max-width: 310px; width: 100%;">
+          <mat-form-field appearance="fill">
+            <mat-label>Product name</mat-label>
+            <input formControlName="title" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description"  matInput></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let cat of (productCategories$ | async)" [value]="cat.id">
+                {{cat.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Supplier</mat-label>
+            <mat-select formControlName="supplier">
+              <mat-option *ngFor="let sup of (suppliers$ | async)" [value]="sup.id">
+                {{sup.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="half">
+            <mat-label>Cost</mat-label>
+            <input formControlName="cost" type="number" matInput/>
+            <span matPrefix>&pound;&nbsp;</span>
+          </mat-form-field>
+
+
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions style="text-align: right;">
+        <button [disabled]="saving" mat-stroked-button [routerLink]="['/admin']">
+          <mat-icon>arrow_back</mat-icon>
+          Back
+        </button>
+        <button mat-raised-button color="accent"
+                (click)="onClickSave()"
+                [disabled]="!productForm.valid || saving">
+          <mat-icon>done</mat-icon>
+          Save
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+  </form>
+</div>
+

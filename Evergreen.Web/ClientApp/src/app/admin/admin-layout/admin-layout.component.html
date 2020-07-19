@@ -1,0 +1,20 @@
+<mat-toolbar color="accent" style="margin-bottom: 20px;">
+  <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <image href="assets/garden.svg" height="40" width="40"/>
+  </svg>
+  <span style="color: #000;">Store Admin</span>
+  <span class="spacer"></span>
+  <ng-container *ngIf="profile$ | async as profile">
+    <button mat-stroked-button [mat-menu-trigger-for]="adminToolbarMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{profile.name}}
+    </button>
+  </ng-container>
+
+  <mat-menu #adminToolbarMenu>
+    <button mat-menu-item [routerLink]="['/']">Go to store</button>
+    <button mat-menu-item (click)="signOut()">Sign out</button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

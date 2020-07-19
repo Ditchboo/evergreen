@@ -1,0 +1,7 @@
+.edit-container mat-form-field {
+  width: 100%;
+}
+
+.edit-container mat-form-field.half {
+  width: 50%;
+}

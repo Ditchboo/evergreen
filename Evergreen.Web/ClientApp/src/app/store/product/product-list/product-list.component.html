@@ -1,0 +1,51 @@
+<ng-container *ngIf="(productCat$ | async) as productCategory">
+  <div style="background-color: #80e27e">
+    <div style="max-width: 900px; margin: 0 auto; display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+  align-content: start">
+      <img height="120" [src]="productCategory.imageUrl" alt="Image of {{productCategory.title}}" style="flex: 0 0 auto;
+  margin: 10px;">
+
+      <div>
+        <h1 style="font-weight: 300; font-size: 36px; line-height: 56px; display: flex; margin: 0;">{{productCategory.title}}</h1>
+        <p style="font-weight: 200; font-size: 18px;">{{productCategory.description}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <section style="display: flex;
+  max-width: 920px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch">
+
+    <mat-card *ngFor="let p of productCategory.products" style="flex: 1 1 auto; margin: 10px; width: 24%; position: relative;">
+      <mat-card-title style="word-break: break-word;">
+        {{p.title}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{p.description}}<br/>
+        <span style="font-weight:bold;">&pound;{{(p.cost / 100).toFixed(2)}}</span>
+      </mat-card-subtitle>
+
+      <img mat-card-image src="/assets/garden.svg" alt="Placeholder image">
+
+      <mat-card-actions style="bottom: 20px; position: absolute;">
+        <button mat-raised-button color="primary" (click)="onClickAddToBasket(p)">
+          Add to basket
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+
+</ng-container>
+
+
+
+

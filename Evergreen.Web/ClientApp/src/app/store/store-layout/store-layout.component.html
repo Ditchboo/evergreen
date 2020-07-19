@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <image href="assets/garden.svg" height="40" width="40"/>
+    </svg>
+  <a id="brand__name" [routerLink]="['/']">
+    <span style="color: #FFF;">Evergreen</span>
+  </a>
+
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" [routerLink]="['/basket']">
+    Basket
+    <mat-icon>shopping_basket</mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="toolbarMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #toolbarMenu>
+    <button [routerLink]="['/admin']" mat-menu-item *ngIf="!auth.loggedIn">
+      <mat-icon>login</mat-icon>
+      Sign in
+    </button>
+    <button [routerLink]="['/admin']" mat-menu-item *ngIf="auth.loggedIn">
+      <mat-icon>settings</mat-icon>
+      Store admin
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<footer style="background-color: #80e27e; overflow: hidden; padding: 5px 0;">
+  <div style="text-align: center;">
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <image href="assets/garden.svg" height="40" width="40"/>
+    </svg>
+    <p style="margin: 0;">&copy; Evergreen Garden Centre<br/><span style="font-style: italic; font-size: 12px;">A fictitious company</span></p>
+  </div>
+</footer>
