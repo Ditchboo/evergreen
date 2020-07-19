@@ -39,10 +39,6 @@ namespace Evergreen.Web
             {
                 options.Authority = domain;
                 options.Audience = Configuration["Auth0:ApiIdentifier"];
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    NameClaimType = ClaimTypes.NameIdentifier
-                };
             });
         }
 
@@ -70,6 +66,7 @@ namespace Evergreen.Web
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

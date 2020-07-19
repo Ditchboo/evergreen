@@ -45,7 +45,7 @@ export class EditProductComponent implements OnInit {
 
     this.activatedRoute.paramMap.pipe(
       concatMap((paramMap: ParamMap) => {
-        return paramMap.has('id') ? paramMap.get('id') : of(null);
+        return paramMap.has('id') ? of(paramMap.get('id')) : of(null);
       }),
       switchMap((id: any) => {
         if (!id) {

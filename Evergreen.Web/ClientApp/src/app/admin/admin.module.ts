@@ -7,6 +7,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
 import { EditProductComponent } from './product/edit-product/edit-product.component';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "../shared/auth/auth.interceptor";
 
 
 
@@ -22,6 +24,13 @@ import { EditProductComponent } from './product/edit-product/edit-product.compon
     MatTooltipModule,
     MatPaginatorModule,
     MatMenuModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ]
 })
 export class AdminModule { }
