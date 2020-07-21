@@ -56,11 +56,11 @@ namespace Evergreen.Web.Repositories
             using var con = GetConnection();
             con.Open();
 
-            var cat = con.QuerySingleOrDefault<ProductCategory>("SELECT * FROM ProductCategory WHERE Id = @id AND IsAvailable = 1", new { id });
+            var cat = con.QuerySingleOrDefault<ProductCategory>("SELECT * FROM ProductCategory WHERE Id = @id", new { id });
 
             if (cat != null)
             {
-                cat.Products = con.Query<Product>("SELECT * FROM Product WHERE ProductCategoryId = @id", new { id }).ToList();
+                cat.Products = con.Query<Product>("SELECT * FROM Product WHERE ProductCategoryId = @id AND IsAvailable = 1", new { id }).ToList();
             }
             
             return cat;
